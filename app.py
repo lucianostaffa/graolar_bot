@@ -26,7 +26,7 @@ try:
     sh = gc.open_by_key(SPREADSHEET_ID)
     worksheet_entradas = sh.worksheet("ENTRADAS")
     worksheet_produtos = sh.worksheet("Produtos")
-    st.success("✅ Conexão com Google Sheets estabelecida!")
+    st.success(f"✅ Conexão com Google Sheets OK! Planilha encontrada: {sh.title}")
 except Exception as e:
     st.error(f"❌ Erro ao conectar com Google Sheets: {e}")
     st.stop()
@@ -42,7 +42,7 @@ comando_do_usuario = st.text_area("Digite a mensagem da venda", "")
 if st.button("📤 Processar e registrar venda") and comando_do_usuario.strip():
     data_hoje = date.today().strftime("%Y-%m-%d")
 
-    # --- Montar prompt para Gemini ---
+    # --- 5️⃣ Montar prompt para Gemini ---
     prompt = f"""
 ### CONTEXTO ###
 Você é um assistente de IA especialista em processar pedidos para a loja de cafés "Grão Lar". Sua função é interpretar mensagens de texto sobre vendas e estruturar essas informações em JSON para serem inseridas na planilha Google Sheets.
@@ -74,7 +74,7 @@ Analise a MENSAGEM DO USUÁRIO e extraia: data, tipo de café, quantidade, valor
 }}
 """
 
-    # --- 5️⃣ Chamar Gemini AI ---
+    # --- 6️⃣ Chamar Gemini AI ---
     try:
         model = genai.GenerativeModel('gemini-2.5-flash')
         response = model.generate_content(prompt)
@@ -84,7 +84,7 @@ Analise a MENSAGEM DO USUÁRIO e extraia: data, tipo de café, quantidade, valor
         st.error(f"❌ Erro ao chamar Gemini AI: {e}")
         st.stop()
 
-    # --- 6️⃣ Inserir venda na planilha ---
+    # --- 7️⃣ Inserir venda na planilha ---
     nova_linha = [
         dados_da_ia.get("data"),
         dados_da_ia.get("tipo_de_cafe"),

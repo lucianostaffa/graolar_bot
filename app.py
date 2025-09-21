@@ -98,4 +98,11 @@ Analise a MENSAGEM DO USUÁRIO e extraia: data, tipo de café, quantidade, valor
     try:
         all_values = worksheet_entradas.get_all_values()
         next_row_index = len(all_values) + 1
-        worksheet_entradas.update(f"A{next_row_index}:G{next_row_index}", [nova_linha],_]()_
+        worksheet_entradas.update(
+            f"A{next_row_index}:G{next_row_index}",
+            [nova_linha],
+            value_input_option='USER_ENTERED'
+        )
+        st.success(f"✅ Venda registrada com sucesso: {nova_linha}")
+    except Exception as e:
+        st.error(f"❌ Falha ao atualizar a planilha: {e}")

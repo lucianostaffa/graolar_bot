@@ -1,6 +1,6 @@
-streamlit
-gspread
-google-auth
-google-auth-oauthlib
-google-auth-httplib2
-google-generativeai
+streamlit>=1.22.0
+pandas>=2.1.0
+gspread>=5.8.0
+google-auth>=2.20.0
+google-generativeai>=0.1.0
+st-aggrid>=0.4.0
